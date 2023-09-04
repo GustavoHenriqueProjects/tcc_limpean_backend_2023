@@ -5,7 +5,9 @@
  **************************************************/
 
 const ERROR_INVALID_CONTENT_TYPE = { status: 415, message: 'O tipo de mídia (Content-Type) da solicitação não é compatível com o servidor. Esperado: application/json'}
-const ERRO_INTERNAL_SERVER = {status: 500, message: 'Erro interno no servidor, tente novamente mais tarde.'}  
+const ERRO_INVALID_USER = {status: 400, message: "Email ou Senha inválidos."}
+const ERRO_INTERNAL_SERVER = {status: 500, message: 'Erro interno no servidor, tente novamente mais tarde.'} 
+const ERRO_NOT_FOUND = {status: 404, message: 'Nenhum registro encontrado na requisição!'} 
 const ERRO_NAME_PHOTO_PASSWORD = {status: 400, message: "Atenção o nome, senha e foto são campos obrigatorios. OBS: A senha deve ter no mínimo 6 caracteres. Verifique e tente novamente."}
 const ERRO_REQUIRED_DATA_CLIENTE = {status: 400, message: 'Atenção, verifique a documentação para enviar a requisição com o formato e tipos corretos.'}
 const ERRO_REQUIRED_DATA_DIARISTA = {status: 400, message: 'Atenção, verifique a documentação para enviar a requisição com o formato e tipos corretos.'}
@@ -17,8 +19,11 @@ const ERRO_REQUIRE_BIRTH_DATE = {status: 400, message: "Atenção a data informa
 const ERRO_NUMBER_PHONE = {status: 400, message: "Atenção o número de telefone esta errado. verique e tente novamente. exemplo: (11) 1111-11111"}
 const ERRO_ADDRESS = {status: 400, message: "Atenção, verifique os dados referentes ao endereço e tente novamente"}
 const ERRO_DELETE_USER = {status: 500, message: "Erro ao tentar deletar conta de usuario, verifique os dados e tente novamente."}
-const ERRO_NOT_FOUND = {status: 404, message: 'Nenhum registro encontrado na requisição!'}
 const ERRO_REQUIRED_ID = {status: 400, message: 'O atributo id é obrigatório na requisição!'};
+
+const ERRO_REQUIRED_TOKEN = {status: 401, message: "Token não fornecido."}
+const ERRO_INVALID_TOKEN = {status: 401, message: "Token inválido."}
+
 
 /***************************************   CONSTANTES DE SUCESSO  ************************************************************************************************/
 const CREATED_REGISTER = {status: 201, message: "Registro criado com sucesso."}
@@ -43,5 +48,8 @@ export {
     ERRO_REQUIRED_DATA_HOUSE_CLIENTE,
     ERRO_NOT_FOUND,
     UPDATED_ITEM,
-    ERRO_REQUIRED_ID
+    ERRO_REQUIRED_ID,
+    ERRO_INVALID_USER,
+    ERRO_INVALID_TOKEN,
+    ERRO_REQUIRED_TOKEN
 }

@@ -5,6 +5,7 @@ import {registerDiarista} from "../../controller/controllerDiarista/registerDiar
 import {autenticarUser} from "../../controller/controllerCliente/loginCliente/controllerLogin"
 import * as message from "../../modulo/config"
 import * as jwt from 'jsonwebtoken'
+import { autenticarUserDiarista } from "../../controller/controllerDiarista/loginDiarista/controllerLogin"
 
 const jsonParser = bodyParser.json()
 
@@ -59,16 +60,14 @@ const verifyJWT = async function(request: Request, response: Response, next: Nex
     const SECRETE = 'a1b2c3';
 
     if (!token) {
-        console.log('token')
         return response.status(401).json({ message: 'Token não fornecido.' });
     }
 
     try {
         const decoded = jwt.verify(Array.isArray(token) ? token[0] : token, SECRETE);
-        console.log('Token válido:', decoded);
         next();
     } catch (error) {
-        return response.json("{'erro': 'Seu token é inválido'}")
+        return response.status(401).json(message.ERRO_INVALID_TOKEN)
     }
 }
 
@@ -77,18 +76,14 @@ router.post('/v1/login/cliente', jsonParser, async function (request, response) 
     let contentType = request.headers['content-type']
 
     if(contentType === 'application/json'){
-
+        
         let dataBody = request.body
         
         let status = await autenticarUser(dataBody)
 
-        if(status){
-            response.status(200)
-            response.json(status)
-        }else{
-            response.status(415)
-            response.json("{'erro': 'erro no servidor'}")
-        }
+        response.status(200)
+        response.json(status)
+        
     }
 })
 
@@ -117,9 +112,26 @@ router.post('/v1/cadastro/diarista', jsonParser, async function (request: Reques
     }
 })
 
+//EndPoint responsavel por fazer o login do diarista
+router.post('/v1/login/diarista', jsonParser, async function (request, response) {
 
-// router.get('/v1/form-dados', verifyJWT, jsonParser, async function (request, response) {
-//     console.log("Acesso")
-// })
+    let contentType = request.headers['content-type']
+
+    if(contentType === 'application/json'){
+        
+        let dataBody = request.body
+        
+        let status = await autenticarUserDiarista(dataBody)
+
+        response.status(200)
+        response.json(status)
+        
+    }
+})
+
+//EndPoint de teste, para verificar autenticidade do token
+router.get('/v1/form-dados', verifyJWT, jsonParser, async function (request, response) {
+    console.log("Acesso")
+ })
 
 export { router }
