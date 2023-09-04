@@ -43,7 +43,7 @@ const registerUser = async function (dataBody: Diarista) {
         
 
         if (!verifyDiarist) {
-
+              
             transaction = await prisma.$transaction(async (prisma) => {
 
                 const tbl_cidade = await prisma.tbl_cidade.create({
