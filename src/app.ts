@@ -13,11 +13,6 @@
  *  npm add -D @types/cors
  *  tsc --init
  *
- *  npm run dev
- *
- *  "scripts": {
- *  "dev": "ts-node-dev --transpile-only src/index.ts"
- *  },
  * 
  *  Para converte em js: npm i tsup -D 
  *  Configura o package.json
@@ -33,10 +28,17 @@
  * 
  *  Para mudar o banco local e deixar online: npx prisma migrate dev
  * 
- * Para mudar o orin do git: git remote set-url origin git://repository.url
+ * Para mudar o origin do git: git remote set-url origin git://repository.url
  * Para saber o repositorio: git remote -v
  * 
  * Extensão para o shema.prisma: Prisma
+ * 
+ * 
+ * *****************************************************************
+ *  npx prisma migrate dev -> Para instalar as tabelas do banco
+ *  npm run dev -> Para rodar o código com os endpoints
+ *  npm run seed -> Para rodar todos os scripts de insert do banco
+ * *****************************************************************
  * 
  */
 

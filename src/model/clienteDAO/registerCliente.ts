@@ -1,8 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 interface Cliente {
+    typeUser: string,
     email: string,
     password: string,
     nameUser: string,
@@ -14,6 +15,7 @@ interface Cliente {
     cpf: string,
     biography: string | null,
     address: {
+        typeHouse: number,          // Tipo de casa
         state: number,              // Estado
         city: string,               // Cidade
         cep: string,                // CEP
@@ -26,6 +28,7 @@ interface Cliente {
 
 const registerUser = async function (dataBody: Cliente) {
 
+    let transaction
     try {
 
         const verifyClient = await prisma.tbl_cliente.findFirst({
@@ -33,67 +36,72 @@ const registerUser = async function (dataBody: Cliente) {
                 OR: [
                     { email: dataBody.email.toLowerCase() },
                     { cpf: dataBody.cpf }
-                  ]
+                ]
             }
-        });
-        
+        })
 
         if (!verifyClient) {
-            const tbl_cidade = await prisma.tbl_cidade.create({
-                data: {
-                    nome: dataBody.address.city,
-                    id_estado: dataBody.address.state
-                }
-            });
 
-            const tbl_endereco = await prisma.tbl_endereco.create({
-                data: {
-                    logradouro: dataBody.address.publicPlace,
-                    bairro: dataBody.address.district,
-                    cep: dataBody.address.cep,
-                    numero_residencia: dataBody.address.houseNumber,
-                    complemento: dataBody.address.complement,
-                    id_cidade: tbl_cidade.id
-                }
-            });
+            transaction = await prisma.$transaction(async (prisma) => {
+                const tbl_cidade = await prisma.tbl_cidade.create({
+                    data: {
+                        nome: dataBody.address.city,
+                        id_estado: dataBody.address.state
+                    }
+                })
 
-            const tbl_tipo_residencia = await prisma.tbl_tipo_residencia.create({
-                data: {
-                    nome: 'Casa'
-                }
-            });
+                const tbl_endereco = await prisma.tbl_endereco.create({
+                    data: {
+                        logradouro: dataBody.address.publicPlace,
+                        bairro: dataBody.address.district,
+                        cep: dataBody.address.cep,
+                        numero_residencia: dataBody.address.houseNumber,
+                        complemento: dataBody.address.complement,
+                        id_cidade: tbl_cidade.id
+                    }
+                })
 
-            const tbl_cliente = await prisma.tbl_cliente.create({
-                data: {
-                    nome: dataBody.nameUser,
-                    cpf: dataBody.cpf,
-                    data_nascimento: new Date(dataBody.birthDate),
-                    biografia: dataBody.biography,
-                    foto_perfil: dataBody.photoUser,
-                    email: dataBody.email.toLowerCase(),
-                    senha: dataBody.password,
-                    id_genero: dataBody.idGender
-                }
-            });
+                const tbl_cliente = await prisma.tbl_cliente.create({
+                    data: {
+                        nome: dataBody.nameUser,
+                        cpf: dataBody.cpf,
+                        data_nascimento: new Date(dataBody.birthDate),
+                        biografia: dataBody.biography,
+                        foto_perfil: dataBody.photoUser,
+                        email: dataBody.email.toLowerCase(),
+                        senha: dataBody.password,
+                        id_genero: dataBody.idGender
+                    }
+                })
 
-            const residencia = await prisma.tbl_residencia.create({
-                data: {
-                    id_cliente: tbl_cliente.id,
-                    id_endereco: tbl_endereco.id,
-                    id_tipo_residencia: tbl_tipo_residencia.id
-                }
-            });
-        }else{
+                await prisma.tbl_telefone_cliente.create({
+                    data: {
+                        numero_telefone: dataBody.phone,
+                        ddd: dataBody.ddd,
+                        id_cliente: tbl_cliente.id
+                    }
+                })
+
+                await prisma.tbl_residencia_cliente.create({
+                    data: {
+                        id_cliente: tbl_cliente.id,
+                        id_endereco: tbl_endereco.id,
+                        id_tipo_residencia: dataBody.address.typeHouse
+                    }
+                })
+
+            })
+        } else {
             return false
         }
         return true
     } catch (error) {
         return false
     } finally {
-        await prisma.$disconnect();
+        await prisma.$disconnect()
     }
-
 }
+
 
 export {
     registerUser

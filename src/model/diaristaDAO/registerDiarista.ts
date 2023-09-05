@@ -1,9 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
-
+import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient();
 
 interface Diarista {
+    typeUser: string,
     email: string,
     password: string,
     nameUser: string,
@@ -43,7 +43,7 @@ const registerUser = async function (dataBody: Diarista) {
         
 
         if (!verifyDiarist) {
-              
+
             transaction = await prisma.$transaction(async (prisma) => {
 
                 const tbl_cidade = await prisma.tbl_cidade.create({
@@ -78,6 +78,15 @@ const registerUser = async function (dataBody: Diarista) {
                         id_endereco: tbl_endereco.id
                     }
                 });
+
+
+                await prisma.tbl_telefone_diarista.create({
+                    data: {
+                        numero_telefone: dataBody.phone,
+                        ddd: dataBody.ddd,
+                        id_diarista: tbl_diarista.id
+                    }
+                })
 
             });
 
