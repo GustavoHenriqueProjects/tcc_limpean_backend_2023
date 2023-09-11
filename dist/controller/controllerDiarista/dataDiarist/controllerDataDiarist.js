@@ -23,23 +23,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginTypeUser = void 0;
+exports.dataDiarist = void 0;
 const message = __importStar(require("../../../modulo/config"));
-const controllerLogin_1 = require("../../controllerDiarista/loginDiarista/controllerLogin");
-const controllerLogin_2 = require("../../controllerCliente/loginCliente/controllerLogin");
-const loginTypeUser = async function (login) {
-    let statusLogin;
-    if (typeof login.typeUser !== "string" || (login.typeUser.toLocaleLowerCase() !== "diarist" && login.typeUser.toLocaleLowerCase() !== "client")) {
-        statusLogin = message.ERRO_INVALID_TYPE_USER;
+const jwt = __importStar(require("jsonwebtoken"));
+const dataDiarist = async function (token) {
+    const SECRETE = '3oFEe4PtHxJeXsa7hY8WBFtCt1AJ4GwgqF6WARF1NG0mUnc89W';
+    try {
+        const decoded = jwt.verify(Array.isArray(token) ? token[0] : token, SECRETE);
+        const { id, name } = decoded;
+        return message.CREATED_REGISTER;
     }
-    else {
-        if (login.typeUser.toLowerCase() === "diarist") {
-            statusLogin = await (0, controllerLogin_1.loginDiarist)(login);
-        }
-        else if (login.typeUser.toLowerCase() === "client") {
-            statusLogin = await (0, controllerLogin_2.loginClient)(login);
-        }
+    catch (error) {
+        console.log("error", error);
+        return message.ERRO_INVALID_TOKEN;
     }
-    return statusLogin;
 };
-exports.loginTypeUser = loginTypeUser;
+exports.dataDiarist = dataDiarist;

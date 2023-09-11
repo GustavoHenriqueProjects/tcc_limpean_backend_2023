@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validate = exports.createJWT = void 0;
 const jwt = require('jsonwebtoken');
-const SECRETE = 'a1b2c3';
+const SECRETE = '3oFEe4PtHxJeXsa7hY8WBFtCt1AJ4GwgqF6WARF1NG0mUnc89W';
 const EXPIRES = "24h";
 const createJWT = (payload) => {
     const token = jwt.sign({

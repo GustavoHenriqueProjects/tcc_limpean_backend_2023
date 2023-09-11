@@ -21,6 +21,9 @@ const loginDiarista = async function (dataBody: Login): Promise<Payload | false>
                 senha: dataBody.password 
             }
         })
+
+        console.log(verifyDiarist);
+        
         
         if (verifyDiarist) {
             return {

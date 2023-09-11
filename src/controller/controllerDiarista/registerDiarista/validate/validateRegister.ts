@@ -24,10 +24,7 @@ interface Diarista {
 
 function validateTypesJson(json: any): boolean {
     try {
-        const diarista: Diarista = json;
-
-        console.log(json);
-                
+        const diarista: Diarista = json;                
 
         // Validar se todas as propriedades estão presentes no JSON
         if (
@@ -171,7 +168,7 @@ function validadeAddress(address: Address){
     let statusAddress = true
 
     if(
-           typeof address.state !== "number"|| address.state <= 0    ||
+           typeof address.state !== "number"|| address.state <= 0 || address.state > 27 ||
            !address.city         || address.city === ""              ||
            !address.cep          || address.cep === ""               || 
            !address.district     || address.district === ""          ||

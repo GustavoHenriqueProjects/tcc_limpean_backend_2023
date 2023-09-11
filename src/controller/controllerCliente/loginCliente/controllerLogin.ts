@@ -13,21 +13,24 @@ const loginClient = async function (body: LoginClient) {
         body.email === ""    || body.email == null    ||
         body.password === "" || body.password == null
     ) {
-        return false
+        return message.ERRO_INVALID_USER
     } else {
         try {
-
+            
             const dataUser = await db.loginCliente(body);
             
             if (dataUser) {
                 const token = jwt.createJWT(dataUser);
                 let statusJson = {
+                    status: 200,
                     id: dataUser.id,
                     email: dataUser.email,
                     token: token
-                }
+                }                
                 return statusJson;
             } else {
+                console.log("test");
+                
                 return message.ERRO_INVALID_USER;
             }
         } catch (error) {

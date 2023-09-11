@@ -23,23 +23,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginTypeUser = void 0;
+exports.registerTypeUser = void 0;
 const message = __importStar(require("../../../modulo/config"));
-const controllerLogin_1 = require("../../controllerDiarista/loginDiarista/controllerLogin");
-const controllerLogin_2 = require("../../controllerCliente/loginCliente/controllerLogin");
-const loginTypeUser = async function (login) {
-    let statusLogin;
-    if (typeof login.typeUser !== "string" || (login.typeUser.toLocaleLowerCase() !== "diarist" && login.typeUser.toLocaleLowerCase() !== "client")) {
-        statusLogin = message.ERRO_INVALID_TYPE_USER;
+const controllerRegisterDiarista_1 = require("../../controllerDiarista/registerDiarista/controllerRegisterDiarista");
+const controllerRegisterClient_1 = require("../../controllerCliente/registerCliente/controllerRegisterClient");
+const registerTypeUser = async function (user) {
+    let statusRegister;
+    if (typeof user.typeUser !== "string" || (user.typeUser.toLowerCase() !== "diarist" && user.typeUser.toLowerCase() !== "client")) {
+        statusRegister = message.ERRO_INVALID_TYPE_USER;
     }
     else {
-        if (login.typeUser.toLowerCase() === "diarist") {
-            statusLogin = await (0, controllerLogin_1.loginDiarist)(login);
+        if (user.typeUser.toLowerCase() === "diarist") {
+            statusRegister = await (0, controllerRegisterDiarista_1.registerDiarista)(user);
         }
-        else if (login.typeUser.toLowerCase() === "client") {
-            statusLogin = await (0, controllerLogin_2.loginClient)(login);
+        else if (user.typeUser.toLowerCase() === "client") {
+            statusRegister = await (0, controllerRegisterClient_1.registerCliente)(user);
         }
     }
-    return statusLogin;
+    return statusRegister;
 };
-exports.loginTypeUser = loginTypeUser;
+exports.registerTypeUser = registerTypeUser;

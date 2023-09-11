@@ -5,7 +5,7 @@
  **************************************************/
 
 const ERROR_INVALID_CONTENT_TYPE = { status: 415, message: 'O tipo de mídia (Content-Type) da solicitação não é compatível com o servidor. Esperado: application/json'}
-const ERRO_INVALID_USER = {status: 400, message: "Email ou Senha inválidos."}
+const ERRO_INVALID_USER = {status: 401, message: "Email ou Senha inválidos."}
 const ERRO_INVALID_TYPE_USER = {status: 400, message: "Atenção, informe o tipo de usuario e tente novamente."}
 const ERRO_INTERNAL_SERVER = {status: 500, message: 'Erro interno no servidor, tente novamente mais tarde.'}  
 const ERRO_NAME_PHOTO_PASSWORD = {status: 500, message: "Atenção o nome, senha e foto são campos obrigatorios. OBS: A senha deve ter no mínimo 6 caracteres .Verifique e tente novamente."}

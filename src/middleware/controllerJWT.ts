@@ -5,7 +5,7 @@
  *************************************************/
 
 const jwt = require('jsonwebtoken');
-const SECRETE = 'a1b2c3';
+const SECRETE = '3oFEe4PtHxJeXsa7hY8WBFtCt1AJ4GwgqF6WARF1NG0mUnc89W';
 const EXPIRES = "24h";
 
 interface Payload {

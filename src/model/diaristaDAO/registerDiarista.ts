@@ -51,7 +51,7 @@ const registerUser = async function (dataBody: Diarista) {
                         nome: dataBody.address.city,
                         id_estado: dataBody.address.state
                     }
-                });
+                })
 
                 const tbl_endereco = await prisma.tbl_endereco.create({
                     data: {
@@ -62,7 +62,7 @@ const registerUser = async function (dataBody: Diarista) {
                         complemento: dataBody.address.complement,
                         id_cidade: tbl_cidade.id
                     }
-                });
+                })
 
                 const tbl_diarista = await prisma.tbl_diarista.create({
                     data: {
@@ -77,7 +77,7 @@ const registerUser = async function (dataBody: Diarista) {
                         id_genero: dataBody.idGender,
                         id_endereco: tbl_endereco.id
                     }
-                });
+                })
 
 
                 await prisma.tbl_telefone_diarista.create({
@@ -88,7 +88,15 @@ const registerUser = async function (dataBody: Diarista) {
                     }
                 })
 
-            });
+                await prisma.tbl_status_conta_diarista.create({
+                    data: {
+                        data_status: new Date(),
+                        id_diarista: tbl_diarista.id,
+                        id_status_conta: 1
+                    }
+                })
+
+            })
 
         }else{
             return false

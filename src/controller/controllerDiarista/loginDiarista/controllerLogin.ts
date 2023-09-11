@@ -13,7 +13,7 @@ const loginDiarist = async function (body: LoginDiarist) {
         body.email === ""    || body.email == null    ||
         body.password === "" || body.password == null
     ) {
-        return false
+        return message.ERRO_INVALID_USER
     } else {
         try {
 
@@ -22,6 +22,7 @@ const loginDiarist = async function (body: LoginDiarist) {
             if (dataUser) {
                 const token = jwt.createJWT(dataUser);
                 let statusJson = {
+                    status: 200,
                     id: dataUser.id,
                     email: dataUser.email,
                     token: token
@@ -33,7 +34,7 @@ const loginDiarist = async function (body: LoginDiarist) {
         } catch (error) {
             return message.ERRO_INTERNAL_SERVER;
         }
-    }
+   }
 }
 
 export {

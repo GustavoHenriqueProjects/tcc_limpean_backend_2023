@@ -96,6 +96,30 @@ const insertStateBrazil = async function () {
     }
 }
 
+const insertTypeStatusRegister = async function () {
+
+    const status = await prisma.tbl_status_conta.findFirst({
+        where: { 
+            status: true 
+        }
+    })
+
+    if(!status){
+
+        await prisma.tbl_status_conta.createMany({
+            data: [
+              {
+                status: true
+              },
+              {
+                status: false
+              }
+            ]
+        })
+    }
+
+}
+
 insertGender()
     .then(() => {
         console.log("Inserção de gêneros concluído com sucesso");
@@ -126,6 +150,17 @@ insertGender()
     })
     .catch((error) =>{
         console.error("Erro ao inserir os estados:", error)
+    })
+    .finally(async () => {
+        await prisma.$disconnect()
+    })
+
+    insertTypeStatusRegister()
+    .then(() => {
+        console.log("Inserção dos tipos de status da conta foi inserido com sucesso");
+    })
+    .catch((error) =>{
+        console.error("Erro ao inserir os status da conta:", error)
     })
     .finally(async () => {
         await prisma.$disconnect()

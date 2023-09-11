@@ -12,6 +12,7 @@ datasource db {
 
 
 
+
 //***************** Tabelas referentes a endereço **********************************
 model tbl_estado {
   id       Int      @id @default(autoincrement())
@@ -371,3 +372,4 @@ model tbl_avaliacao_cliente {
 
   @@unique([id])
 }
+
