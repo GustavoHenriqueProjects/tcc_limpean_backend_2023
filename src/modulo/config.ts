@@ -25,7 +25,7 @@ const ERRO_INVALID_TOKEN = {status: 401, message: "Token inválido."}
 
 /***************************************   CONSTANTES DE SUCESSO  ************************************************************************************************/
 const CREATED_REGISTER = {status: 201, message: "Registro criado com sucesso."}
-const DELETE_CLIENTE = {status: 200, message: "Registro deletado com sucesso."}
+const DELETE_USER = {status: 200, message: "Registro deletado com sucesso."}
 
 export {
     ERROR_INVALID_CONTENT_TYPE,
@@ -43,7 +43,7 @@ export {
     ERRO_NUMBER_PHONE,
     ERRO_ADDRESS,
     ERRO_DELETE_USER,
-    DELETE_CLIENTE,
+    DELETE_USER,
     ERRO_REQUIRED_DATA_HOUSE_CLIENTE,
     ERRO_REQUIRED_TOKEN,
     ERRO_INVALID_TOKEN

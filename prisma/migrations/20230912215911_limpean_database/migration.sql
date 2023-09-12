@@ -126,7 +126,7 @@ CREATE TABLE `tbl_telefone_diarista` (
 -- CreateTable
 CREATE TABLE `tbl_status_conta` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `status` BOOLEAN NOT NULL,
+    `status` VARCHAR(10) NOT NULL,
 
     UNIQUE INDEX `tbl_status_conta_id_key`(`id`),
     PRIMARY KEY (`id`)
