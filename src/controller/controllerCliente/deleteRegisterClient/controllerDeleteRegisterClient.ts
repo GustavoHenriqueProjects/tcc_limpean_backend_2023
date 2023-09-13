@@ -17,15 +17,17 @@ const deleteRegisterClient = async function (token: string) {
         const { id, name} = decoded 
 
         const statusClient = await deleteClient(Number(id), name)
+       
         if(statusClient){
             return message.DELETE_USER
         }else{
             return message.ERRO_DELETE_USER
         }
-
+        
     } catch (error) {
         return message.ERRO_INVALID_TOKEN
     }
+    
 }
 
 

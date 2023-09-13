@@ -90,6 +90,14 @@ const registerUser = async function (dataBody: Cliente) {
                     }
                 })
 
+                await prisma.tbl_status_conta_cliente.create({
+                    data: {
+                        data_status: new Date(),
+                        id_cliente: tbl_cliente.id,
+                        id_status_conta: 1
+                    }
+                })
+
             })
         } else {
             return false

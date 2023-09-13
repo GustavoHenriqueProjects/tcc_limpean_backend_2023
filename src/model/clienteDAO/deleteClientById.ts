@@ -13,7 +13,7 @@ const deleteClient = async function (id: number, email: string) {
                   ]
             }
         })
-
+       
         if(verifyClient) {
             let transaction = await prisma.$transaction(async (prisma) =>{
                 await prisma.tbl_status_conta_cliente.update({
@@ -26,7 +26,7 @@ const deleteClient = async function (id: number, email: string) {
                     }
                 })
             })
-
+           
             return true
         }else{
             return false

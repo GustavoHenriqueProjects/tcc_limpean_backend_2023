@@ -88,7 +88,7 @@ router.delete('/v1/limpean/client/:token', verifyJWT, async function (request, r
 
     const token = request.params.token
     const statusClient = await deleteRegisterClient(token)
-
+   
     response.status(statusClient.status)
     response.json(statusClient)
 
