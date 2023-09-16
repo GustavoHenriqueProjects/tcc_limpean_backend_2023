@@ -8,8 +8,10 @@ import { registerTypeUser } from "../../controller/controllerUser/register/regis
 import { dataDiaristById } from "../../controller/controllerDiarista/dataDiarist/controllerDataDiaristById"
 import { dataAllDiarist } from "../../controller/controllerDiarista/dataDiarist/controllerDataAllDiarist"
 import { deleteRegisterClient } from "../../controller/controllerCliente/deleteRegisterClient/controllerDeleteRegisterClient"
+import { updateDataClient } from "../../controller/controllerCliente/updateDataPersonalClient/controllerUpdateDataPersonalClient"
 import * as message from "../../modulo/config"
 import * as jwt  from "jsonwebtoken"
+
 
 const jsonParser = bodyParser.json()
 
@@ -22,7 +24,7 @@ const verifyJWT = async function(request: Request, response: Response, next: Nex
     //Para uso Front-end 
     //const token = request.headers['x-access-token'];
     
-    const SECRETE = '3oFEe4PtHxJeXsa7hY8WBFtCt1AJ4GwgqF6WARF1NG0mUnc89W';
+    const SECRETE = message.REQUIRE_SECRETE;
 
     if (!token) {
         
@@ -91,6 +93,20 @@ router.delete('/v1/limpean/client/:token', verifyJWT, async function (request, r
    
     response.status(statusClient.status)
     response.json(statusClient)
+
+})
+
+//EndPoint para atualizar um cliente
+router.put('/v1/limpean/client/:token', verifyJWT, jsonParser, async function (request, response){
+
+    const token = request.params.token
+    const dataBody = request.body
+
+    const statusClient = await updateDataClient(token, dataBody)
+
+    response.status(statusClient.status)
+    response.json(statusClient)
+
 
 })
 //****************************************Cliente*****************************************************

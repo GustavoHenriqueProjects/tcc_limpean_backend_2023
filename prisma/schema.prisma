@@ -90,7 +90,7 @@ model tbl_cliente {
   biografia            String?   @db.Text
   foto_perfil          String?   @db.Text
   email                String    @db.VarChar(255) @unique
-  senha                String    @db.VarChar(30)
+  senha                String    @db.VarChar(64)
   id_genero            Int
   residencia           tbl_residencia_cliente[]
   telefone             tbl_telefone_cliente[]
@@ -104,7 +104,7 @@ model tbl_cliente {
 
 model tbl_telefone_cliente {
   id                Int @id @default(autoincrement())
-  numero_telefone   String @db.VarChar(15)
+  numero_telefone   String @db.VarChar(15) 
   ddd               String @db.VarChar(2)
   id_cliente        Int
 
@@ -122,7 +122,7 @@ model tbl_diarista{
   biografia            String?   @db.Text
   foto_perfil          String?   @db.Text
   email                String    @db.VarChar(255) @unique
-  senha                String    @db.VarChar(30)
+  senha                String    @db.VarChar(64)
   media_valor          String    @db.VarChar(45)
   id_endereco          Int
   id_genero            Int
@@ -139,7 +139,7 @@ model tbl_diarista{
 
 model tbl_telefone_diarista {
   id                Int @id @default(autoincrement())
-  numero_telefone   String @db.VarChar(15)
+  numero_telefone   String @db.VarChar(15) 
   ddd               String @db.VarChar(2)
   id_diarista       Int
 
@@ -150,7 +150,7 @@ model tbl_telefone_diarista {
 
 model tbl_status_conta {
   id            Int @id @default(autoincrement())
-  status        String @db.VarChar(10) 
+  status        String @db.VarChar(5) 
   statusContaDiarista           tbl_status_conta_diarista[]
   statusContaCliente            tbl_status_conta_cliente[]
 
@@ -372,4 +372,3 @@ model tbl_avaliacao_cliente {
 
   @@unique([id])
 }
-

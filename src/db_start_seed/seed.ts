@@ -100,7 +100,7 @@ const insertTypeStatusRegister = async function () {
 
     const status = await prisma.tbl_status_conta.findFirst({
         where: { 
-            status: true 
+            status: "true" 
         }
     })
 
@@ -109,10 +109,10 @@ const insertTypeStatusRegister = async function () {
         await prisma.tbl_status_conta.createMany({
             data: [
               {
-                status: true
+                status: "true"
               },
               {
-                status: false
+                status: "false"
               }
             ]
         })

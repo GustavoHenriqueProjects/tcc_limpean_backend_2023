@@ -2,31 +2,59 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-const deleteClient = async function (id: number, email: string) {
-    
+interface UpdateDataClient{
+    name: string | null,
+    biography: string | null,
+    idGrender: number | null,
+    phone: string | null,
+    ddd: string | null,
+    password: string | null,
+    photoUser: string | null
+}
+
+interface TokenPayLoad {
+    id: string,
+    name: string
+}
+
+const deleteClient = async function (token: TokenPayLoad, updateClient: UpdateDataClient) {
+
     try {
         const verifyClient = await prisma.tbl_cliente.findFirst({
             where: {
-                OR: [
-                    { email: email.toLowerCase() },
-                    { id: id }
+                AND: [
+                    { email: token.name.toLowerCase() },
+                    { id: Number(token.id )}
                   ]
             }
         })
-       
+
+        
         if(verifyClient) {
-            let transaction = await prisma.$transaction(async (prisma) =>{
-                await prisma.tbl_status_conta_cliente.update({
+          
+                const tbl_cliente = await prisma.tbl_cliente.update({
                     where: {
                         id: verifyClient.id
                     },
                     data: {
-                        data_status: new Date(),
-                        id_status_conta: 2
+                        nome: updateClient.name ?? undefined,
+                        biografia: updateClient.biography ?? undefined,
+                        id_genero: updateClient.idGrender ?? undefined,
+                        senha: updateClient.password ?? undefined,
+                        foto_perfil: updateClient.photoUser ?? undefined
                     }
                 })
-            })
-           
+
+                await prisma.tbl_telefone_cliente.update({
+                    where: {
+                        id: tbl_cliente.id
+                    },
+                    data: {
+                        numero_telefone: updateClient.phone ?? undefined,
+                        ddd: updateClient.ddd ?? undefined
+                    }
+                })
+
             return true
         }else{
             return false
