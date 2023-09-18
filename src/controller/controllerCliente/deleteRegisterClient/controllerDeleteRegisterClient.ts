@@ -9,7 +9,7 @@ interface TokenPayLoad {
 
 const deleteRegisterClient = async function (token: string) {
     
-    const SECRETE = '3oFEe4PtHxJeXsa7hY8WBFtCt1AJ4GwgqF6WARF1NG0mUnc89W'
+    const SECRETE = message.REQUIRE_SECRETE
 
     try {
         
