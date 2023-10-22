@@ -41,6 +41,8 @@
  *  npx prisma migrate dev -> Para instalar as tabelas no banco
  *  npm run dev -> Para rodar o código com os endpoints
  *  npm run seed -> Para rodar todos os scripts de insert do banco
+ *  
+ *  npm run test -> para rodar os testes unitarios
  * *****************************************************************
  * 
  */

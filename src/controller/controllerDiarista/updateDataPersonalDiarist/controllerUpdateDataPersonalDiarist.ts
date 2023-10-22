@@ -21,13 +21,13 @@ interface UpdateDataDiarist {
         newPhone: string | null;
     }[];
     address: {
-        state: number;              // Estado
-        city: string;               // Cidade
-        cep: string;                // CEP
-        publicPlace: string;        // Logradouro
-        complement: string | null;  // Complemento
-        district: string;           // Bairro
-        houseNumber: string;        // Numero da casa
+        state: number | null;              // Estado
+        city: string | null;               // Cidade
+        cep: string | null;                // CEP
+        publicPlace: string | null;        // Logradouro
+        complement: string | null;         // Complemento
+        district: string | null;           // Bairro
+        houseNumber: string | null;        // Numero da casa
     };
 }
 
@@ -55,7 +55,7 @@ const updateDataDiarist = async function (token: string, dataDiarist: UpdateData
             const simpleData = createStructureSimpleDataPersonal(dataDiarist)
             if(simpleData){
                 const updateDataSimple = await db.updateDataSimpleDiarist(tokenDecoded, simpleData)
-                if(!updateDataSimple){
+                if(!updateDataSimple){                    
                     return message.ERRO_UPDATE_DATA_SIMPLE_DIARIST
                 }
             }
