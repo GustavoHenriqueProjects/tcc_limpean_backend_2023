@@ -5,8 +5,8 @@ import {updateDataClient} from './src/controller/controllerCliente/updateDataPer
 import {updateDataAddressClient} from './src/controller/controllerCliente/updateDataPersonalClient/controllerUpdateAddressClient'
 import { updateDataDiarist } from './src/controller/controllerDiarista/updateDataPersonalDiarist/controllerUpdateDataPersonalDiarist'
 
-const tokenClient = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmVybmFuZGExMEBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNjk3ODM4Mjk5LCJleHAiOjE2OTc5MjQ2OTl9.CPGJrNtEWOD_C0gq0Lwij1sZw-iHRDVeRIviPPFWPjc"
-const tokenDiarist = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicGF1bG9AZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTY5Nzg0MDA1MCwiZXhwIjoxNjk3OTI2NDUwfQ.B_WGXQ5L-vET78OI5tzRr8YUipHRrPEeZNbZirXDkIE"
+const tokenClient = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmVybmFuZGExMEBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNjk4MDA2NTI1LCJleHAiOjE2OTgwOTI5MjV9.Eiop6q5tYozVAzwCnZ7MAYvYpK7EwhrcsAI3xEXz-6E"
+const tokenDiarist = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicGF1bG9AZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTY5ODAwNzMyOSwiZXhwIjoxNjk4MDkzNzI5fQ.tLpkoLvkuqUCKmpGuPywQ1gtMdaSW4omlhcyIp0EiJY"
 
 test('Login cliente', async () => {
 
@@ -86,6 +86,37 @@ test('Atualização dos dados de endereço do cliente', async () => {
         complement: "Novo Complemento",
         district: "Novo distrito",
         houseNumber: "603"
+    })
+
+    expect(result).toEqual({
+        status: 201,
+        message: "Registro atualizado com sucesso"
+    })
+})
+
+test('Atualização dos dados do diarista', async () => {
+    const result = await updateDataDiarist(tokenDiarist, {
+        name: "Paulo Vinicius Silva",
+        biography: "Sou Mêcanico Automotivo e Diarista nos fins de semana.",
+        idGender: null,
+        password: null,
+        photoUser: null,
+        averagePrice: null,
+        phones: [{
+            ddd: null,
+            phone: null,
+            newDDD: null,
+            newPhone: null,
+        }],
+        address: {
+            state: null,        // Estado
+            city: null,         // Cidade
+            cep: null,          // CEP
+            publicPlace: null,  // Logradouro
+            complement: null,   // Complemento
+            district: null,     // Bairro
+            houseNumber: null   // Numero da casa
+        }
     })
 
     expect(result).toEqual({
