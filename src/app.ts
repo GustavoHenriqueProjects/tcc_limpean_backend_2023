@@ -42,7 +42,8 @@
  *  npm run dev -> Para rodar o código com os endpoints
  *  npm run seed -> Para rodar todos os scripts de insert do banco
  *  
- *  npm run test -> para rodar os testes unitarios
+ *  npm run test -> para rodar os testes unitarios e testes de integração
+ *  npx jest integration.test.ts -> Somente roda os teste de integração
  * *****************************************************************
  * 
  */
@@ -68,3 +69,7 @@ app.use(cors(corsOptions))
 app.use(server)
 
 app.listen(port, () => console.log('Servidor Aguardando requisições na porta 8080'))
+
+export {
+  app
+}
