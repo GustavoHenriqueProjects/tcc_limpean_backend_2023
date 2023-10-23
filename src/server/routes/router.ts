@@ -88,7 +88,7 @@ router.post('/v1/limpean/login', jsonParser, async function (request, response) 
     const contentType = request.headers['content-type']
 
     if(contentType === 'application/json'){
-        
+                
         const dataBody = request.body        
         
         const statusLogin = await loginTypeUser(dataBody)
@@ -174,7 +174,7 @@ router.get('/v1/limpean/client', verifyJWT, async function(request, response){
 router.put('/v1/limpean/client', verifyJWT, jsonParser, async function (request, response){
 
     const token = request.headers['x-api-key']
-
+    
     const dataBody = request.body
 
     const statusClient = await updateDataClient(token as string, dataBody)
