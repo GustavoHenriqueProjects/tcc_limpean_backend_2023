@@ -18,7 +18,7 @@ const dbRegisterAssessmentClient = async function(token: Token, data: Assessemen
 
         const verifyDiarist = await prisma.tbl_diarista.findFirst({
             where: {
-                id: Number(token.id) 
+                id: data.personEvaluatedId
             }
         })
 
@@ -28,7 +28,7 @@ const dbRegisterAssessmentClient = async function(token: Token, data: Assessemen
                 id_cliente: verifyClient?.id,
                 data_hora: `${data.date.replace(/\//g, '-')}T${data.hour}:00Z`
             }
-        })
+        })        
 
         if(verifyClient && verifyDiarist && !verifyRegisterAssessment){
 

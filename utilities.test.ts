@@ -5,8 +5,8 @@ import { updateDataClient } from './src/controller/controllerCliente/updateDataP
 import { updateDataAddressClient } from './src/controller/controllerCliente/updateDataPersonalClient/controllerUpdateAddressClient'
 import { updateDataDiarist } from './src/controller/controllerDiarista/updateDataPersonalDiarist/controllerUpdateDataPersonalDiarist'
 
-const tokenClient = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmVybmFuZGExMEBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNjk4MDA2NTI1LCJleHAiOjE2OTgwOTI5MjV9.Eiop6q5tYozVAzwCnZ7MAYvYpK7EwhrcsAI3xEXz-6E"
-const tokenDiarist = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicGF1bG9AZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTY5ODAwNzMyOSwiZXhwIjoxNjk4MDkzNzI5fQ.tLpkoLvkuqUCKmpGuPywQ1gtMdaSW4omlhcyIp0EiJY"
+let tokenClient = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmVybmFuZGExMEBnbWFpbC5jb20iLCJpZCI6MSwiaWF0IjoxNjk4MTQ0NTE5LCJleHAiOjE2OTgyMzA5MTl9.ReP6CCYTZo7pWd4opPIMXVeFihAkpxItz0yAkuu865Q"
+let tokenDiarist = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicGF1bG9AZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTY5ODE0NDUzOSwiZXhwIjoxNjk4MjMwOTM5fQ.z-FelcovZIZCwW4lOvtoWqzSCixXeP7LqbnmN1F_gO4"
 
 describe('Testes de utilitarios de API', () => {
 

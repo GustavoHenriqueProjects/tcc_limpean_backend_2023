@@ -29,7 +29,7 @@ const dbRegisterAssessmentDiarist = async function(token: Token, data: Assesseme
                 data_hora: `${data.date.replace(/\//g, '-')}T${data.hour}:00Z`
             }
         })        
-
+        
         if(verifyDiarist && verifyClient && !verifyRegisterAssessment){
 
             await prisma.tbl_avaliacao_cliente.create({
